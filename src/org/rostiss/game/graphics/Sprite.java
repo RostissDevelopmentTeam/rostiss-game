@@ -18,14 +18,15 @@ package org.rostiss.game.graphics;
 
 public class Sprite {
 
-	private final int SIZE;
+	public static Sprite grass = new Sprite(0, 1, 16, SpriteSheet.spriteSheet);
+	public static Sprite brick = new Sprite(1, 0, 16, SpriteSheet.spriteSheet);
+	public static Sprite debug = new Sprite(16, 0xFF00FF);
 
 	public int[] pixels;
+	public final int SIZE;
 
 	private int x, y;
 	private SpriteSheet spriteSheet;
-
-	private Sprite grass = new Sprite(0, 0, 16, spriteSheet);
 
 	public Sprite(int x, int y, int size, SpriteSheet spriteSheet) {
 		this.x = x;
@@ -36,10 +37,21 @@ public class Sprite {
 		load();
 	}
 
+	public Sprite(int size, int color) {
+		this.SIZE = size;
+		this.pixels = new int[SIZE * SIZE];
+		setColor(color);
+	}
+
 	private void load() {
 		for(int y = 0; y < SIZE; y++)
 			for(int x = 0; x < SIZE; x++)
-				pixels[x + y * SIZE] = spriteSheet.pixels[(x + this.x) + (y + this.y) * spriteSheet.SIZE];
+				pixels[x + y * SIZE] = spriteSheet.pixels[(x + this.x * SIZE) + (y + this.y * SIZE) * spriteSheet.SIZE];
+	}
+
+	private void setColor(int color) {
+		for(int i = 0; i < pixels.length; i++)
+			pixels[i] = color;
 	}
 
 }

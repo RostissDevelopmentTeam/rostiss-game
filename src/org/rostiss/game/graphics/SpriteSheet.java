@@ -22,8 +22,9 @@ import java.io.IOException;
 
 public class SpriteSheet {
 
-	public final int SIZE;
+	public static SpriteSheet spriteSheet = new SpriteSheet("/spritesheets/spriteSheet.png", 128);
 
+	public final int SIZE;
 	public int[] pixels;
 
 	private String file;

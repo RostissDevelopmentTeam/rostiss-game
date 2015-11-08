@@ -2,6 +2,10 @@ package org.rostiss.game;
 
 import org.rostiss.game.graphics.Renderer;
 import org.rostiss.game.input.Keyboard;
+import org.rostiss.game.levels.Level;
+import org.rostiss.game.levels.RandomLevel;
+import org.rostiss.game.levels.tiles.GrassTile;
+import org.rostiss.game.levels.tiles.Tile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,6 +41,7 @@ public class Game extends Canvas implements Runnable {
 	private Thread thread;
 	private BufferedImage image;
 	private Keyboard keyboard;
+	private Level level;
 	private int[] pixels;
 	private int x, y;
 	private boolean running = false;
@@ -49,6 +54,7 @@ public class Game extends Canvas implements Runnable {
 		pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 		keyboard = new Keyboard();
 		addKeyListener(keyboard);
+		level = new RandomLevel(64, 64);
 		x = y = 0;
 	}
 
@@ -108,7 +114,7 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 		renderer.clear();
-		renderer.render(x, y);
+		level.render(x, y, renderer);
 		arraycopy(renderer.pixels, 0, pixels, 0, renderer.pixels.length);
 		Graphics g = strategy.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
