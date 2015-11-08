@@ -1,5 +1,7 @@
 package org.rostiss.game.graphics;
 
+import org.rostiss.game.levels.tiles.Tile;
+
 import java.util.Random;
 
 /**
@@ -23,10 +25,10 @@ public class Renderer {
 	private static final Random random = new Random();
 
 	public final int MAP_SIZE = 8, MAP_SIZE_MASK = MAP_SIZE - 1;
-
 	public int[] pixels, tiles;
+	public int width, height;
 
-	private int width, height;
+	private int xOffset, yOffset;
 
 	public Renderer(int width, int height) {
 		this.width = width;
@@ -38,15 +40,18 @@ public class Renderer {
 		}
 	}
 
-	public void render(int xOffset, int yOffset) {
-		for (int y = 0; y < height; y++) {
-			int yy = y + yOffset;
-			//if (yy < 0 || yy >= height) break;
-			for (int x = 0; x < width; x++) {
-				int xx = x + xOffset;
-				//if (xx < 0 || xx >= width) break;
-				int tile = ((xx >> 4) & MAP_SIZE_MASK) + ((yy >> 4) & MAP_SIZE_MASK) * MAP_SIZE;
-				pixels[x + y * width] = tiles[tile];
+	public void renderTile(int xOffset, int yOffset, Tile tile) {
+		xOffset = xOffset << 4;
+		yOffset = yOffset << 4;
+		xOffset -= this.xOffset;
+		yOffset -= this.yOffset;
+		for (int y = 0; y < tile.sprite.SIZE; y++) {
+			int yp = y + yOffset;
+			for (int x = 0; x < tile.sprite.SIZE; x++) {
+				int xp = x + xOffset;
+				if (xp < -tile.sprite.SIZE || xp >= width || yp < 0 || yp >= height) break;
+				if(xp < 0) xp = 0;
+				pixels[xp + yp * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
 			}
 		}
 	}
@@ -54,5 +59,10 @@ public class Renderer {
 	public void clear() {
 		for (int i = 0; i < pixels.length; i++)
 			pixels[i] = 0;
+	}
+
+	public void setOffset(int xOffset, int yOffset) {
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
 	}
 }
