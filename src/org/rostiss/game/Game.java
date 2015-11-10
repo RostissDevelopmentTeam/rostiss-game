@@ -1,11 +1,10 @@
 package org.rostiss.game;
 
+import org.rostiss.game.entities.mobs.Player;
 import org.rostiss.game.graphics.Renderer;
 import org.rostiss.game.input.Keyboard;
 import org.rostiss.game.levels.Level;
 import org.rostiss.game.levels.RandomLevel;
-import org.rostiss.game.levels.tiles.GrassTile;
-import org.rostiss.game.levels.tiles.Tile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,8 +41,8 @@ public class Game extends Canvas implements Runnable {
 	private BufferedImage image;
 	private Keyboard keyboard;
 	private Level level;
+	private Player player;
 	private int[] pixels;
-	private int x, y;
 	private boolean running = false;
 
 	public Game() {
@@ -55,7 +54,7 @@ public class Game extends Canvas implements Runnable {
 		keyboard = new Keyboard();
 		addKeyListener(keyboard);
 		level = new RandomLevel(64, 64);
-		x = y = 0;
+		player = new Player(0, 0, keyboard);
 	}
 
 	public synchronized void start() {
@@ -101,10 +100,7 @@ public class Game extends Canvas implements Runnable {
 
 	private void update() {
 		keyboard.update();
-		if(keyboard.up) y--;
-		if(keyboard.down) y++;
-		if(keyboard.left) x--;
-		if(keyboard.right) x++;
+		player.update();
 	}
 
 	private void render() {
@@ -114,7 +110,8 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 		renderer.clear();
-		level.render(x, y, renderer);
+		level.render(player.x - width / 2, player.y - height / 2, renderer);
+		player.render(renderer);
 		arraycopy(renderer.pixels, 0, pixels, 0, renderer.pixels.length);
 		Graphics g = strategy.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);

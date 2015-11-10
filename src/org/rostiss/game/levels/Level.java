@@ -2,7 +2,6 @@ package org.rostiss.game.levels;
 
 import org.rostiss.game.graphics.Renderer;
 import org.rostiss.game.graphics.Sprite;
-import org.rostiss.game.levels.tiles.GrassTile;
 import org.rostiss.game.levels.tiles.Tile;
 
 /**
@@ -42,9 +41,9 @@ public class Level {
 	public void render(int xOffset, int yOffset, Renderer renderer) {
 		renderer.setOffset(xOffset, yOffset);
 		int x0 = xOffset >> 4;
-		int x1 = (xOffset + renderer.width + Sprite.debug.SIZE) >> 4;
+		int x1 = (xOffset + renderer.width + Sprite.debug.size) >> 4;
 		int y0 = yOffset >> 4;
-		int y1 = (yOffset + renderer.height + Sprite.debug.SIZE) >> 4;
+		int y1 = (yOffset + renderer.height + Sprite.debug.size) >> 4;
 		for(int y = y0; y < y1; y++) {
 			for(int x = x0; x < x1; x++) {
 				getTile(x, y).render(x, y, renderer);

@@ -23,16 +23,27 @@ import java.io.IOException;
 public class SpriteSheet {
 
 	public static SpriteSheet spriteSheet = new SpriteSheet("/spritesheets/spriteSheet.png", 128);
+	public static SpriteSheet playerSheet = new SpriteSheet("/spritesheets/ninja.png", 48, 72);
 
-	public final int SIZE;
+	public final int size, width, height;
 	public int[] pixels;
 
 	private String file;
 
 	public SpriteSheet(String file, int size) {
 		this.file = file;
-		this.SIZE = size;
-		pixels = new int[SIZE * SIZE];
+		this.size = size;
+		this.width = this.height = size;
+		pixels = new int[width * height];
+		load();
+	}
+
+	public SpriteSheet(String file, int width, int height) {
+		this.file = file;
+		this.size = width;
+		this.width = width;
+		this.height = height;
+		pixels = new int[width * height];
 		load();
 	}
 
