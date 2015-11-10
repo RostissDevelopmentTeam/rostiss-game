@@ -24,7 +24,6 @@ public class Renderer {
 
 	private static final Random random = new Random();
 
-	public final int MAP_SIZE = 8, MAP_SIZE_MASK = MAP_SIZE - 1;
 	public int[] pixels, tiles;
 	public int width, height;
 
@@ -34,10 +33,6 @@ public class Renderer {
 		this.width = width;
 		this.height = height;
 		this.pixels = new int[width * height];
-		tiles = new int[MAP_SIZE * MAP_SIZE];
-		for (int i = 0; i < tiles.length; i++) {
-			tiles[i] = random.nextInt(0xFFFFFF);
-		}
 	}
 
 	public void renderTile(int xOffset, int yOffset, Tile tile) {
@@ -45,13 +40,28 @@ public class Renderer {
 		yOffset = yOffset << 4;
 		xOffset -= this.xOffset;
 		yOffset -= this.yOffset;
-		for (int y = 0; y < tile.sprite.SIZE; y++) {
+		for (int y = 0; y < tile.sprite.size; y++) {
 			int yp = y + yOffset;
-			for (int x = 0; x < tile.sprite.SIZE; x++) {
+			for (int x = 0; x < tile.sprite.size; x++) {
 				int xp = x + xOffset;
-				if (xp < -tile.sprite.SIZE || xp >= width || yp < 0 || yp >= height) break;
+				if (xp < -tile.sprite.size || xp >= width || yp < 0 || yp >= height) break;
 				if(xp < 0) xp = 0;
-				pixels[xp + yp * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
+				pixels[xp + yp * width] = tile.sprite.pixels[x + y * tile.sprite.size];
+			}
+		}
+	}
+
+	public void renderPlayer(int xOffset, int yOffset, Sprite sprite) {
+		xOffset -= this.xOffset;
+		yOffset -= this.yOffset;
+		for (int y = 0; y < sprite.height; y++) {
+			int yp = y + yOffset;
+			for (int x = 0; x < sprite.width; x++) {
+				int xp = x + xOffset;
+				if (xp < -sprite.width || xp >= width || yp < 0 || yp >= height) break;
+				if(xp < 0) xp = 0;
+				int color = sprite.pixels[x + y * sprite.width];
+				if(color != 0xFFFF00FF) pixels[xp + yp * width] = color;
 			}
 		}
 	}
