@@ -23,31 +23,57 @@ import org.rostiss.game.input.Keyboard;
 public class Player extends Mob {
 
 	private Keyboard keyboard;
+	private int animation = 0;
 
-	public Player() {}
+	public Player(Keyboard keyboard) {
+		this.x = 0;
+		this.y = 0;
+		this.keyboard = keyboard;
+		this.sprite = Sprite.player_forward0;
+	}
 
 	public Player(int x, int y, Keyboard keyboard) {
 		this.x = x;
 		this.y = y;
 		this.keyboard = keyboard;
-		sprite = Sprite.player1;
+		sprite = Sprite.player_forward0;
 	}
 
 	public void update() {
 		int dx, dy;
 		dx = dy = 0;
+		animation++;
 		if(keyboard.up) dy--;
 		if(keyboard.down) dy++;
 		if(keyboard.left) dx--;
 		if(keyboard.right) dx++;
-		if(dx != 0 || dy != 0) move(dx, dy);
-		if(direction == Direction.FORWARD) sprite = Sprite.player0;
-		if(direction == Direction.BACK) sprite = Sprite.player1;
-		if(direction == Direction.LEFT) sprite = Sprite.player2;
-		if(direction == Direction.RIGHT) sprite = Sprite.player3;
+		if(dx != 0 || dy != 0) {
+			move(dx, dy);
+			isMoving = true;
+		} else isMoving = false;
 	}
 
 	public void render(Renderer renderer) {
+		if(direction == Direction.FORWARD) {
+			if(animation % 20 > 10 && isMoving) sprite = Sprite.player_forward1;
+			else if(isMoving) sprite = Sprite.player_forward2;
+			else sprite = Sprite.player_forward0;
+		}
+		if(direction == Direction.BACK) {
+			if(animation % 20 > 10 && isMoving) sprite = Sprite.player_back1;
+			else if(isMoving) sprite = Sprite.player_back2;
+			else sprite = Sprite.player_back0;
+		}
+		if(direction == Direction.LEFT) {
+			if(animation % 20 > 10 && isMoving) sprite = Sprite.player_left1;
+			else if(isMoving) sprite = Sprite.player_left2;
+			else sprite = Sprite.player_left0;
+		}
+		if(direction == Direction.RIGHT) {
+			if(animation % 20 > 10 && isMoving) sprite = Sprite.player_right1;
+			else if(isMoving) sprite = Sprite.player_right2;
+			else sprite = Sprite.player_right0;
+		}
 		renderer.renderPlayer(x - 8, y - 8, sprite);
 	}
 }

@@ -1,10 +1,12 @@
 package org.rostiss.game.levels;
 
-import java.util.Random;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
- * File: RandomLevel.java
- * Created by Atlas IND on 11/8/2015 at 1:02 PM.
+ * File: SpawnLevel.java
+ * Created by Atlas IND on 11/16/2015 at 10:40 PM.
  * [2014] - [2015] Rostiss Development
  * All rights reserved.
  * NOTICE:  All information contained herein is, and remains
@@ -18,19 +20,23 @@ import java.util.Random;
  * from Rostiss Development.
  */
 
-public class RandomLevel extends Level {
+public class SpawnLevel extends Level {
 
-	private static final Random random = new Random();
+	private int[] tiles;
 
-	public RandomLevel(int width, int height) {
-		super(width, height);
+	public SpawnLevel(String file) {
+		super(file);
 	}
 
-	protected void generateLevel() {
-		for(int y = 0; y < height; y++) {
-			for(int x = 0; x < width; x++) {
-				tiles[x + y * width] = random.nextInt(5);
-			}
+	protected void loadLevel(String file) {
+		try {
+			BufferedImage image = ImageIO.read(SpawnLevel.class.getResource(file));
+			int width = image.getWidth();
+			int height = image.getHeight();
+			tiles = new int[width * height];
+			image.getRGB(0, 0, width, height, tiles, 0, width);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

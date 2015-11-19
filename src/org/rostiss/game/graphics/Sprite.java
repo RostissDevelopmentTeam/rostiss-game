@@ -18,14 +18,25 @@ package org.rostiss.game.graphics;
 
 public class Sprite {
 
-	public static Sprite grass = new Sprite(0, 1, 16, SpriteSheet.spriteSheet);
-	public static Sprite brick = new Sprite(1, 0, 16, SpriteSheet.spriteSheet);
+	public static Sprite grass1 = new Sprite(0, 1, 16, SpriteSheet.spriteSheet);
+	public static Sprite grass2 = new Sprite(0, 2, 16, SpriteSheet.spriteSheet);
+	public static Sprite dirt1 = new Sprite(1, 1, 16, SpriteSheet.spriteSheet);
+	public static Sprite dirt2 = new Sprite(2, 1, 16, SpriteSheet.spriteSheet);
+	public static Sprite dirt3 = new Sprite(3, 1, 16, SpriteSheet.spriteSheet);
 	public static Sprite debug = new Sprite(16, 0xabc);
 
-	public static Sprite player0 = new Sprite(1, 0, 16, 18, SpriteSheet.playerSheet);
-	public static Sprite player1 = new Sprite(1, 2, 16, 18, SpriteSheet.playerSheet);
-	public static Sprite player2 = new Sprite(1, 3, 16, 18, SpriteSheet.playerSheet);
-	public static Sprite player3 = new Sprite(1, 1, 16, 18, SpriteSheet.playerSheet);
+	public static Sprite player_forward0 = new Sprite(1, 0, 16, 18, SpriteSheet.playerSheet);
+	public static Sprite player_forward1 = new Sprite(0, 0, 16, 18, SpriteSheet.playerSheet);
+	public static Sprite player_forward2 = new Sprite(2, 0, 16, 18, SpriteSheet.playerSheet);
+	public static Sprite player_back0 = new Sprite(1, 2, 16, 18, SpriteSheet.playerSheet);
+	public static Sprite player_back1 = new Sprite(0, 2, 16, 18, SpriteSheet.playerSheet);
+	public static Sprite player_back2 = new Sprite(2, 2, 16, 18, SpriteSheet.playerSheet);
+	public static Sprite player_left0 = new Sprite(1, 3, 16, 18, SpriteSheet.playerSheet);
+	public static Sprite player_left1 = new Sprite(0, 3, 16, 18, SpriteSheet.playerSheet);
+	public static Sprite player_left2 = new Sprite(2, 3, 16, 18, SpriteSheet.playerSheet);
+	public static Sprite player_right0 = new Sprite(1, 1, 16, 18, SpriteSheet.playerSheet);
+	public static Sprite player_right1 = new Sprite(0, 1, 16, 18, SpriteSheet.playerSheet);
+	public static Sprite player_right2 = new Sprite(2, 1, 16, 18, SpriteSheet.playerSheet);
 
 	public int[] pixels;
 	public final int size, width, height;

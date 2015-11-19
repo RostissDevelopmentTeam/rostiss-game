@@ -21,7 +21,11 @@ import org.rostiss.game.graphics.Sprite;
 
 public class Tile {
 
-	public static Tile grassTile = new GrassTile();
+	public static Tile grass1Tile = new GroundTile(Sprite.grass1);
+	public static Tile grass2Tile = new GroundTile(Sprite.grass2);
+	public static Tile dirt1Tile = new GroundTile(Sprite.dirt1);
+	public static Tile dirt2Tile = new GroundTile(Sprite.dirt2);
+	public static Tile dirt3Tile = new GroundTile(Sprite.dirt3);
 	public static Tile debugTile = new DebugTile();
 
 	public Sprite sprite;

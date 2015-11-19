@@ -4,7 +4,7 @@ import org.rostiss.game.graphics.Renderer;
 import org.rostiss.game.graphics.Sprite;
 
 /**
- * File: GrassTile.java
+ * File: GroundTile.java
  * Created by Atlas IND on 11/8/2015 at 1:09 PM.
  * [2014] - [2015] Rostiss Development
  * All rights reserved.
@@ -19,10 +19,10 @@ import org.rostiss.game.graphics.Sprite;
  * from Rostiss Development.
  */
 
-public class GrassTile extends Tile {
+public class GroundTile extends Tile {
 
-	public GrassTile() {
-		super(Sprite.grass);
+	public GroundTile(Sprite sprite) {
+		super(sprite);
 	}
 
 	public void render(int x, int y, Renderer renderer) {
