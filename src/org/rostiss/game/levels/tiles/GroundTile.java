@@ -4,8 +4,8 @@ import org.rostiss.game.graphics.Renderer;
 import org.rostiss.game.graphics.Sprite;
 
 /**
- * File: Tile.java
- * Created by Atlas IND on 11/8/2015 at 1:06 PM.
+ * File: GroundTile.java
+ * Created by Atlas IND on 11/8/2015 at 1:09 PM.
  * [2014] - [2015] Rostiss Development
  * All rights reserved.
  * NOTICE:  All information contained herein is, and remains
@@ -19,26 +19,13 @@ import org.rostiss.game.graphics.Sprite;
  * from Rostiss Development.
  */
 
-public class Tile {
+public class GroundTile extends Tile {
 
-	public static Tile grass1Tile = new GroundTile(Sprite.grass1);
-	public static Tile grass2Tile = new GroundTile(Sprite.grass2);
-	public static Tile dirt1Tile = new GroundTile(Sprite.dirt1);
-	public static Tile dirt2Tile = new GroundTile(Sprite.dirt2);
-	public static Tile dirt3Tile = new GroundTile(Sprite.dirt3);
-	public static Tile stone1Tile = new GroundTile(Sprite.stone1);
-	public static Tile debugTile = new DebugTile();
-
-	public Sprite sprite;
-	public int x, y;
-
-	public Tile(Sprite sprite) {
-		this.sprite = sprite;
+	public GroundTile(Sprite sprite) {
+		super(sprite);
 	}
 
-	public void render(int x, int y, Renderer renderer) {}
-
-	public boolean isSolid() {
-		return false;
+	public void render(int x, int y, Renderer renderer) {
+		renderer.renderTile(x, y, this);
 	}
 }

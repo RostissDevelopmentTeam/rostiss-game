@@ -1,11 +1,12 @@
-package org.rostiss.game.levels.tiles;
+package org.rostiss.game.levels;
 
-import org.rostiss.game.graphics.Renderer;
-import org.rostiss.game.graphics.Sprite;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
- * File: GrassTile.java
- * Created by Atlas IND on 11/8/2015 at 1:09 PM.
+ * File: SpawnLevel.java
+ * Created by Atlas IND on 11/16/2015 at 10:40 PM.
  * [2014] - [2015] Rostiss Development
  * All rights reserved.
  * NOTICE:  All information contained herein is, and remains
@@ -19,13 +20,21 @@ import org.rostiss.game.graphics.Sprite;
  * from Rostiss Development.
  */
 
-public class GrassTile extends Tile {
+public class SpawnLevel extends Level {
 
-	public GrassTile() {
-		super(Sprite.grass);
+	public SpawnLevel(String file) {
+		super(file);
 	}
 
-	public void render(int x, int y, Renderer renderer) {
-		renderer.renderTile(x, y, this);
+	protected void loadLevel(String file) {
+		try {
+			BufferedImage image = ImageIO.read(SpawnLevel.class.getResource(file));
+			width = image.getWidth();
+			height = image.getHeight();
+			tiles = new int[width * height];
+			image.getRGB(0, 0, width, height, tiles, 0, width);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

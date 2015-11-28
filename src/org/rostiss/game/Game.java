@@ -4,7 +4,7 @@ import org.rostiss.game.entities.mobs.Player;
 import org.rostiss.game.graphics.Renderer;
 import org.rostiss.game.input.Keyboard;
 import org.rostiss.game.levels.Level;
-import org.rostiss.game.levels.RandomLevel;
+import org.rostiss.game.levels.SpawnLevel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +32,7 @@ import static java.lang.System.arraycopy;
 
 public class Game extends Canvas implements Runnable {
 
-	public static final String TITLE = "Rostiss' Development Playground - ";
+	public static final String TITLE = "Rostiss' Development Playground | ";
 	public static int width = 300, height = width / 16 * 9, scale = 3;
 
 	private Renderer renderer;
@@ -53,7 +53,7 @@ public class Game extends Canvas implements Runnable {
 		pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 		keyboard = new Keyboard();
 		addKeyListener(keyboard);
-		level = new RandomLevel(64, 64);
+		level = new SpawnLevel("/levels/spawn.png");
 		player = new Player(0, 0, keyboard);
 	}
 
@@ -90,8 +90,8 @@ public class Game extends Canvas implements Runnable {
 			frames++;
 			if (System.currentTimeMillis() - timer > 1000L) {
 				timer += 1000L;
-				System.out.println(updates + "ups, " + frames + "fps");
-				frame.setTitle(TITLE + updates + "ups, " + frames + "fps");
+				System.out.println(updates + " ups, " + frames + " fps");
+				frame.setTitle(TITLE + updates + " ups, " + frames + " fps");
 				updates = frames = 0;
 			}
 			previousTime = currentTime;
