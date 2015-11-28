@@ -26,7 +26,6 @@ public class Level {
 
 	public Level(String file) {
 		loadLevel(file);
-		generateLevel();
 	}
 
 	public Level(int width, int height) {
@@ -45,10 +44,6 @@ public class Level {
 		int y1 = (yOffset + renderer.height + 16) >> 4;
 		for(int y = y0; y < y1; y++) {
 			for(int x = x0; x < x1; x++) {
-				if (x + y * 16 < 0 || x + y * 16 >= 256) {
-					Tile.debugTile.render(x, y, renderer);
-					continue;
-				}
 				getTile(x, y).render(x, y, renderer);
 			}
 		}
@@ -61,6 +56,7 @@ public class Level {
 		if(tiles[x + y * width] == 0xff500000) return Tile.dirt1Tile;
 		if(tiles[x + y * width] == 0xff600000) return Tile.dirt2Tile;
 		if(tiles[x + y * width] == 0xff700000) return Tile.dirt3Tile;
+		if(tiles[x + y * width] == 0xff777777) return Tile.stone1Tile;
 		return Tile.debugTile;
 	}
 

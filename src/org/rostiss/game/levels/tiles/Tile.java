@@ -26,6 +26,7 @@ public class Tile {
 	public static Tile dirt1Tile = new GroundTile(Sprite.dirt1);
 	public static Tile dirt2Tile = new GroundTile(Sprite.dirt2);
 	public static Tile dirt3Tile = new GroundTile(Sprite.dirt3);
+	public static Tile stone1Tile = new GroundTile(Sprite.stone1);
 	public static Tile debugTile = new DebugTile();
 
 	public Sprite sprite;

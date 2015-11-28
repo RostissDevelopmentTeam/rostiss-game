@@ -22,8 +22,6 @@ import java.io.IOException;
 
 public class SpawnLevel extends Level {
 
-	private int[] tiles;
-
 	public SpawnLevel(String file) {
 		super(file);
 	}
@@ -31,8 +29,8 @@ public class SpawnLevel extends Level {
 	protected void loadLevel(String file) {
 		try {
 			BufferedImage image = ImageIO.read(SpawnLevel.class.getResource(file));
-			int width = image.getWidth();
-			int height = image.getHeight();
+			width = image.getWidth();
+			height = image.getHeight();
 			tiles = new int[width * height];
 			image.getRGB(0, 0, width, height, tiles, 0, width);
 		} catch (IOException e) {

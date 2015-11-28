@@ -23,6 +23,7 @@ public class Sprite {
 	public static Sprite dirt1 = new Sprite(1, 1, 16, SpriteSheet.spriteSheet);
 	public static Sprite dirt2 = new Sprite(2, 1, 16, SpriteSheet.spriteSheet);
 	public static Sprite dirt3 = new Sprite(3, 1, 16, SpriteSheet.spriteSheet);
+	public static Sprite stone1 = new Sprite(1, 0, 16, SpriteSheet.spriteSheet);
 	public static Sprite debug = new Sprite(16, 0xabc);
 
 	public static Sprite player_forward0 = new Sprite(1, 0, 16, 18, SpriteSheet.playerSheet);
